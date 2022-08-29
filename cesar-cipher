@@ -1,0 +1,27 @@
+def cesar_cipher(message, key)
+# 65 - 90 for A-B
+# 97 - 122 for a-b
+  array = message.char.map do |c|
+
+    if c.ord >= 65 && c.ord <= 90
+      # logic for wrap around
+      if key.positive?
+          c.ord + key > 90 ? (c.ord + key) - 26 : c.ord + key
+      else
+          c.ord + key < 65 ? (c.ord + key) + 26 : c.ord + key
+      end
+  elsif c.ord >= 97 && c.ord <= 122
+      if key.positive?
+          c.ord + key > 122 ? (c.ord + key) - 26 : c.ord + key
+      else
+          c.ord + key < 97 ? (c.ord + key) + 26 : c.ord + key
+      end
+  else
+      c.ord
+  end
+end
+
+cipher = array.map! { |a| a.chr }.join
+print "A brand new encryption"
+puts cipher
+end
